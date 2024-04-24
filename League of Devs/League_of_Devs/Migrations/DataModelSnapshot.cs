@@ -23,8 +23,11 @@ namespace League_of_Devs.Migrations
 
             modelBuilder.Entity("League_of_Devs.Models.AccountsModel", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -48,9 +51,8 @@ namespace League_of_Devs.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("AccountsId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("AccountsId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
