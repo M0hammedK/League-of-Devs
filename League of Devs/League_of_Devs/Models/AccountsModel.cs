@@ -12,5 +12,11 @@ namespace League_of_Devs.Models
         public string Password { get; set; }
         [NotMapped]
         public string Password2 { get; set; }
+        public string Authorization { get; set; } = "developer";
+        public string Bio { get; set; } = "";
+        public string Experience { get; set; } = "";
+        public string Availability { get; set; } = "";
+        
+
     }
 }

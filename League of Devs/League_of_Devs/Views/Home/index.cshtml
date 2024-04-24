@@ -1,3 +1,5 @@
+@using League_of_Devs.Controllers;
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -35,7 +37,7 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Sign up</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">Sign in</a></li>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Projects</a></li>
                     </ul>
                 </div>
@@ -47,8 +49,12 @@
                 <div class="text-center my-5">
                     <h1 class="fw-bolder">Welcome to League of Devs!</h1>
                     <p class="lead mb-0">Your window to the developed future </p>
-                <a class="blue-button" href="./post/add">New Post</a>
-                <a class="blue-button" href="./post/userinfo">Edit nfo</a>
+                @{if(loginController.User != null)
+                {
+                    <a class="blue-button" href="./post/add">New Post</a>
+                    <a class="blue-button" href="./post/userinfo">Edit nfo</a>
+                }
+                }
             </div>
             </div>
         </header>

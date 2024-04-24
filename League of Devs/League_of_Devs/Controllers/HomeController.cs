@@ -7,14 +7,19 @@ namespace League_of_Devs.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IWebHostEnvironment hostEnvironment, ILogger<HomeController> logger)
         {
+            _hostEnvironment = hostEnvironment;
             _logger = logger;
         }
 
+        public static string WebRootPath;
+
         public IActionResult Index()
         {
+            WebRootPath = this._hostEnvironment.WebRootPath;
             return View();
         }
 

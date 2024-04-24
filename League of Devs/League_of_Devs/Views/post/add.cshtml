@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model PostsModel
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -31,42 +33,34 @@
             </div>
         </div>
     </nav>
+    <div style="height:50px"> </div>
     <div class="form-container">
-        <form action="submit-post.php" method="post" enctype="multipart/form-data">
+        <form asp-action="add" method="post" asp-controller="post" enctype="multipart/form-data">
             <div class="form-group">
-                <label class="form-label" for="project-title">Project Title:</label>
-                <input class="form-input" type="text" id="project-title" name="project-title" required>
+                <label class="form-label" asp-for="Title">Project Title:</label>
+                <input class="form-input" type="text" id="project-title" asp-for="Title" required>
             </div>
             <div class="form-group">
-                <label class="form-label" for="summary">Summary:</label>
-                <textarea class="form-input" id="summary" name="summary" required></textarea>
+                <label class="form-label" asp-for="Summary">Summary:</label>
+                <textarea class="form-input" id="summary" asp-for="Summary" required></textarea>
             </div>
             <div class="form-group">
-                <label class="form-label" for="thumbnail">Thumbnail Image:</label>
-                <input class="form-input" type="file" id="thumbnail" name="thumbnail" accept="image/*" required>
+                <label class="form-label" asp-for="ThumbImage">Thumbnail Image:</label>
+                <input class="form-input" type="file" id="thumbnail" asp-for="ThumbImage" accept="image/*" required>
             </div>
             <div class="form-group">
-                <label class="form-label" for="content">Content:</label>
-                <textarea class="form-input" id="content" name="content" required></textarea>
+                <label class="form-label" asp-for="Content">Content:</label>
+                <textarea class="form-input" id="content" asp-for="Content" required></textarea>
             </div>
             <div class="form-group">
-                <label class="form-label" for="images">Upload Images:</label>
-                <input class="form-input" type="file" id="images" name="images[]" accept="image/*" multiple>
+                <label class="form-label" asp-for="Image">Upload Images:</label>
+                <input class="form-input" type="file" id="images" asp-for="Image" accept="image/*" multiple>
             </div>
-            <input class="submit-button" type="submit" value="Submit">
-
-            <script>
-                tinymce.init({
-                    selector: '#content',
-                    apiKey: 's1zuonvvfcyl7vbylg8gq4qp36vgs3i7zo5uulplov1d9kzk',
-                    plugins: 'advlist autolink lists link image charmap print preview anchor',
-                    toolbar: 'undo redo | formatselect | bold italic underline | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-                    menubar: false,
-                    height: 300
-                });
-            </script>
+            <p></p>
+                <button type="submit">Submit</button>
         </form>
     </div>
+            
     <!-- Page header with logo and tagline-->
     @*         <header class="py-5 bg-light border-bottom mb-4">
     <div class="container">
@@ -98,5 +92,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
     <script src="js/scripts.js"></script>
+
 </body>
 </html>
