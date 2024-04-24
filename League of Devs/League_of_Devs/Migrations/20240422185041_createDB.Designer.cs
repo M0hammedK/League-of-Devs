@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace League_of_Devs.Migrations
 {
     [DbContext(typeof(Data))]
-    [Migration("20240423211827_createDB")]
+    [Migration("20240422185041_createDB")]
     partial class createDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,11 +25,8 @@ namespace League_of_Devs.Migrations
 
             modelBuilder.Entity("League_of_Devs.Models.AccountsModel", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -46,40 +43,6 @@ namespace League_of_Devs.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("accounts");
-                });
-
-            modelBuilder.Entity("League_of_Devs.Models.PostsModel", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("AccountsId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountsId");
-
-                    b.ToTable("posts");
-                });
-
-            modelBuilder.Entity("League_of_Devs.Models.PostsModel", b =>
-                {
-                    b.HasOne("League_of_Devs.Models.AccountsModel", "Accounts")
-                        .WithMany()
-                        .HasForeignKey("AccountsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Accounts");
                 });
 #pragma warning restore 612, 618
         }
