@@ -4,7 +4,7 @@ namespace League_of_Devs.Controllers
 {
     public class UsersController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Users()
         {
             return View();
         }
