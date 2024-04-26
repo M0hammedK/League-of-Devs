@@ -51,8 +51,11 @@
                     <p class="lead mb-0">Your window to the developed future </p>
                 @{if(loginController.User != null)
                 {
-                    <a class="blue-button" href="./post/add">New Post</a>
-                    <a class="blue-button" href="./post/userinfo">Edit nfo</a>
+                    <form>
+                            <input type="submit" asp-action="add" asp-controller="post" class="blue-button" value="New post" />
+
+                    <input type="submit" asp-action="userinfo" asp-controller="post" class="blue-button" value="Edit Info" />
+                        </form>
                 }
                 }
             </div>

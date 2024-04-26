@@ -15,10 +15,17 @@ namespace League_of_Devs.Controllers
         {
             return View();
         }
+        public IActionResult userinfo()
+        {
+
+            return View();
+        }
+
 
         [HttpPost]
         public IActionResult add(PostsModel post_data)
         {
+            
             using Data data = new Data();
             string wwwpath = HomeController.WebRootPath;
             string path = Path.Combine(wwwpath, "src");
@@ -67,10 +74,20 @@ namespace League_of_Devs.Controllers
             return View();
         }
 
-
-        public IActionResult userinfo()
+        [HttpPost]
+        public IActionResult userinfo(AccountsModel account)
         {
+            using Data data = new Data();
+            loginController.User.Name = account.Name; 
+            loginController.User.Bio = account.Bio; 
+            loginController.User.Experience = account.Experience;
+            loginController.User.Availability= account.Availability;
+            // data.accounts.Update(data.accounts.Where(x => x.Id == loginController.User.Id).ToList().First());
+            data.accounts.Update(loginController.User);
+            data.SaveChanges();
+            ViewBag.user = loginController.User;
             return View();
         }
+
     }
 }

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@model AccountsModel
+@using League_of_Devs.Controllers;            
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -33,28 +36,44 @@
     </nav>
     <div style="height:50px"> </div>x
     <div class="form-container">
-<form action="submit-post" method="post">
+<form asp-action="userinfo" asp-controller="post" method="post">
     <div class="form-group">
         <label class="form-label" for="name">Name:</label>
-        <input class="form-input" type="text" id="name" name="name" required #asp-for="Name">
+        <input class="form-input" value="@loginController.User.Name" type="text" id="name" asp-for="Name" required >
     </div>
     <div class="form-group">
         <label class="form-label" for="bio">Bio:</label>
-        <textarea class="form-input" id="bio" name="bio" required #asp-for="Bio"></textarea>
+                <input type="text" class="form-input" id="bio" value="@loginController.User.Bio"  required asp-for="Bio">
     </div>
     <div class="form-group">
         <label class="form-label" for="experience">Experience:</label>
-        <textarea class="form-input" id="experience" name="experience" required #asp-for="Experience"></textarea>
+                <input type="text" class="form-input" id="experience" multiple="true" value="@loginController.User.Experience" required asp-for="Experience"></input>
     </div>
     <div class="form-group">
         <label class="form-label">Availability:</label>
         <div>
-            <input type="radio" id="availability-available" name="availability" value="available" required #asp-for="Availability">
-            <label for="availability-available">Available</label>
+
+                    @{
+                        if (loginController.User.Availability == "contracted")
+                        {
+                            <label asp-for="Availability">Available</label>
+                            <input type="radio" id="availability-available" name="availability" value="available" checked="false" required asp-for="Availability">
+                            <label asp-for="Availability">Contracted</label>
+                            <input type="radio" id="availability-contracted" name="availability" value="contracted" checked="true" required asp-for="Availability">
+
+                        }
+
+                        else
+                        {
+                            <label asp-for="Availability">Available</label>
+                            <input type="radio" id="availability-available" name="availability" value="available" checked="true" required asp-for="Availability">
+                            <label asp-for="Availability">Contracted</label>
+                            <input type="radio" id="availability-contracted" name="availability" value="contracted" checked="false" required asp-for="Availability">
+
+                        }
+                    }
         </div>
         <div>
-            <input type="radio" id="availability-contracted" name="availability" value="contracted" required #asp-for="Availability">
-            <label for="availability-contracted">Contracted</label>
         </div>
     </div>
     <input class="submit-button" type="submit" value="Submit">

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace League_of_Devs.Migrations
 {
     [DbContext(typeof(Data))]
-    [Migration("20240424182811_post")]
-    partial class post
+    [Migration("20240424204138_dasdadadda")]
+    partial class dasdadadda
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -72,7 +72,7 @@ namespace League_of_Devs.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AccountsId")
+                    b.Property<int>("AccountId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -97,20 +97,20 @@ namespace League_of_Devs.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountsId");
+                    b.HasIndex("AccountId");
 
                     b.ToTable("posts");
                 });
 
             modelBuilder.Entity("League_of_Devs.Models.PostsModel", b =>
                 {
-                    b.HasOne("League_of_Devs.Models.AccountsModel", "Accounts")
+                    b.HasOne("League_of_Devs.Models.AccountsModel", "Account")
                         .WithMany()
-                        .HasForeignKey("AccountsId")
+                        .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Accounts");
+                    b.Navigation("Account");
                 });
 #pragma warning restore 612, 618
         }
