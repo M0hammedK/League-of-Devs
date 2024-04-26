@@ -1,4 +1,5 @@
-﻿  using League_of_Devs.Models;
+﻿using League_of_Devs.Models;
+using League_of_Devs.DateBase;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,19 +8,22 @@ namespace League_of_Devs.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IWebHostEnvironment hostEnvironment, ILogger<HomeController> logger)
         {
+            _hostEnvironment = hostEnvironment;
             _logger = logger;
         }
 
+        public static string WebRootPath;
+
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
+            WebRootPath = this._hostEnvironment.WebRootPath;
+            using Data data = new Data();
+            if(loginController.User != null) ViewBag.posts = data.posts.Where(x => x.AccountId == loginController.User.Id).ToList();
+            else ViewBag.posts = data.posts.ToList();
             return View();
         }
 

@@ -18,14 +18,14 @@ namespace League_of_Devs.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult login(AccountsModel account)
+		public IActionResult login(AccountsModel client)
 		{
 			List<AccountsModel> accounts = new List<AccountsModel>();
 			using Data data = new Data();
-			accounts = data.accounts.Where(x => x.Email == account.Email).ToList();
+			accounts = data.accounts.Where(x => x.Email == client.Email).ToList();
 			if(accounts.Count != 0)
             {
-				if(accounts[0].Password == account.Password)
+				if(accounts[0].Password == client.Password)
                 {
 					User = accounts[0];
 					return RedirectToAction("index", "Home");
@@ -36,16 +36,20 @@ namespace League_of_Devs.Controllers
 		}
 		
 		[HttpPost]
-		public IActionResult Register(AccountsModel account)
+		public IActionResult Register(AccountsModel client)
 		{
 			List<AccountsModel> accounts = new List<AccountsModel>();
 			using Data data=new Data();
-			accounts=data.accounts.Where(x =>x.Email==account.Email).ToList();
+			accounts=data.accounts.Where(x =>x.Email==client.Email).ToList();
 			if (accounts.Count == 0)
 			{
-				if (account.Password == account.Password2)
+				if (client.Password == client.Password2)
 				{
-					data.accounts.Add(account);
+					if(data.accounts.ToList().Count == 0)
+                    {
+						client.Authorization = "admin";
+                    }
+					data.accounts.Add(client);
 					data.SaveChanges();
 					return RedirectToAction("login", "login");
 
@@ -57,5 +61,11 @@ namespace League_of_Devs.Controllers
 		
 			return View();
 		}
+
+		public IActionResult Logout()
+        {
+			loginController.User = null;
+			return RedirectToAction("index", "Home");
+        }
 	}
 }

@@ -3,6 +3,7 @@ using League_of_Devs.DateBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace League_of_Devs.Migrations
 {
     [DbContext(typeof(Data))]
-    partial class DataModelSnapshot : ModelSnapshot
+    [Migration("20240424174546_createDB")]
+    partial class createDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,7 +72,7 @@ namespace League_of_Devs.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AccountId")
+                    b.Property<int>("AccountsId")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -78,10 +80,6 @@ namespace League_of_Devs.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Summary")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -95,20 +93,20 @@ namespace League_of_Devs.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountId");
+                    b.HasIndex("AccountsId");
 
                     b.ToTable("posts");
                 });
 
             modelBuilder.Entity("League_of_Devs.Models.PostsModel", b =>
                 {
-                    b.HasOne("League_of_Devs.Models.AccountsModel", "Account")
+                    b.HasOne("League_of_Devs.Models.AccountsModel", "Accounts")
                         .WithMany()
-                        .HasForeignKey("AccountId")
+                        .HasForeignKey("AccountsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Account");
+                    b.Navigation("Accounts");
                 });
 #pragma warning restore 612, 618
         }

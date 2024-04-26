@@ -1,3 +1,5 @@
+@using League_of_Devs.Controllers;
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,15 +17,26 @@
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="#!">League of Devs</a>
+                <form><a class="navbar-brand" asp-action="Index" asp-controller="Home">League of Devs</a></form>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Projects</a></li>
-                    </ul>
+               <div class="collapse navbar-collapse" id="navbarSupportedContent" style="justify-content:end;">
+                    <form>
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="Home">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                            @{
+                                if(loginController.User == null)
+                                {
+                                    <li class="nav-item"><a class="nav-link" asp-action="Login" asp-controller="Login">Sign in</a></li>
+                                }
+                                else
+                                {
+                                    <li class="nav-item"><a class="nav-link" asp-action="Logout" asp-controller="Login">Logout</a></li>
+                                }
+                            }
+                            <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="Home">Projects</a></li>
+                        </ul>
+                   </form>
                 </div>
             </div>
         </nav>

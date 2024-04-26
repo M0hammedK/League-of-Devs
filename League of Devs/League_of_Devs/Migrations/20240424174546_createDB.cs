@@ -16,7 +16,11 @@ namespace League_of_Devs.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Authorization = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "developer"),
+                    Bio = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue:""),
+                    Experience = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: ""),
+                    Availability = table.Column<string>(type: "nvarchar(max)", nullable: false, defaultValue: "")
                 },
                 constraints: table =>
                 {
@@ -27,9 +31,12 @@ namespace League_of_Devs.Migrations
                 name: "posts",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Summary = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    thumbimage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    image = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AccountsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
