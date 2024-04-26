@@ -1,4 +1,5 @@
-﻿@using League_of_Devs.Controllers;
+﻿@model AccountsModel
+@using League_of_Devs.Controllers;            
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,53 +22,58 @@
     <!-- Responsive navbar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <form><a class="navbar-brand" asp-action="Index" asp-controller="Home">League of Devs</a></form>
+            <a class="navbar-brand" href="#!">League of Devs</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="justify-content:end;">
-                    <form>
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                            <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="Home">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                            @{
-                                if(loginController.User == null)
-                                {
-                                    <li class="nav-item"><a class="nav-link" asp-action="Login" asp-controller="Login">Sign in</a></li>
-                                }
-                                else
-                                {
-                                    <li class="nav-item"><a class="nav-link" asp-action="Logout" asp-controller="Login">Logout</a></li>
-                                }
-                            }
-                            <li class="nav-item"><a class="nav-link" asp-action="Index" asp-controller="Home">Projects</a></li>
-                        </ul>
-                   </form>
-                </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Projects</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
     <div style="height:50px"> </div>x
     <div class="form-container">
-<form action="submit-post" method="post">
+<form asp-action="userinfo" asp-controller="post" method="post">
     <div class="form-group">
         <label class="form-label" for="name">Name:</label>
-        <input class="form-input" type="text" id="name" name="name" required #asp-for="Name">
+        <input class="form-input" value="@loginController.User.Name" type="text" id="name" asp-for="Name" required >
     </div>
     <div class="form-group">
         <label class="form-label" for="bio">Bio:</label>
-        <textarea class="form-input" id="bio" name="bio" required #asp-for="Bio"></textarea>
+                <input type="text" class="form-input" id="bio" value="@loginController.User.Bio"  required asp-for="Bio">
     </div>
     <div class="form-group">
         <label class="form-label" for="experience">Experience:</label>
-        <textarea class="form-input" id="experience" name="experience" required #asp-for="Experience"></textarea>
+                <input type="text" class="form-input" id="experience" multiple="true" value="@loginController.User.Experience" required asp-for="Experience"></input>
     </div>
     <div class="form-group">
         <label class="form-label">Availability:</label>
         <div>
-            <input type="radio" id="availability-available" name="availability" value="available" required #asp-for="Availability">
-            <label for="availability-available">Available</label>
+
+                    @{
+                        if (loginController.User.Availability == "contracted")
+                        {
+                            <label asp-for="Availability">Available</label>
+                            <input type="radio" id="availability-available" name="availability" value="available" checked="false" required asp-for="Availability">
+                            <label asp-for="Availability">Contracted</label>
+                            <input type="radio" id="availability-contracted" name="availability" value="contracted" checked="true" required asp-for="Availability">
+
+                        }
+
+                        else
+                        {
+                            <label asp-for="Availability">Available</label>
+                            <input type="radio" id="availability-available" name="availability" value="available" checked="true" required asp-for="Availability">
+                            <label asp-for="Availability">Contracted</label>
+                            <input type="radio" id="availability-contracted" name="availability" value="contracted" checked="false" required asp-for="Availability">
+
+                        }
+                    }
         </div>
         <div>
-            <input type="radio" id="availability-contracted" name="availability" value="contracted" required #asp-for="Availability">
-            <label for="availability-contracted">Contracted</label>
         </div>
     </div>
     <input class="submit-button" type="submit" value="Submit">
@@ -97,7 +103,7 @@
         </div>
     </div>
     <!-- Footer-->
-    <footer class="py-5 bg-dark" id="about">
+    <footer class="py-5 bg-dark">
         <div class="container"><p class="m-0 text-center text-white">Copyright &copy; League of Devs 2024</p></div>
     </footer>
     <!-- Bootstrap core JS-->

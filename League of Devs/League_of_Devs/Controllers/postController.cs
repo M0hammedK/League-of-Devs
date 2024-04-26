@@ -7,8 +7,10 @@ namespace League_of_Devs.Controllers
 {
     public class postController : Controller
     {
-        public IActionResult post()
+        public IActionResult post(string page)
         {
+            using Data data = new Data();
+            ViewBag.post = data.posts.Where(x => x.Id == Convert.ToInt32(page)).ToList().First();
             return View();
         }
         public IActionResult add()
@@ -17,6 +19,7 @@ namespace League_of_Devs.Controllers
         }
         public IActionResult userinfo()
         {
+
             return View();
         }
 
@@ -71,6 +74,22 @@ namespace League_of_Devs.Controllers
             return View();
         }
 
+
+
+
+        [HttpPost]
+        public IActionResult userinfo(AccountsModel account)
+        {
+            using Data data = new Data();
+            loginController.User.Name = account.Name;
+            loginController.User.Bio = account.Bio;
+            loginController.User.Experience = account.Experience;
+            loginController.User.Availability = account.Availability;
+            data.accounts.Update(loginController.User);
+            data.SaveChanges();
+            ViewBag.user = loginController.User;
+            return View();
+        }
 
     }
 }

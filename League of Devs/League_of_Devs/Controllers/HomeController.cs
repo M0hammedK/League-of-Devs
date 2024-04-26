@@ -17,7 +17,7 @@ namespace League_of_Devs.Controllers
         }
 
         public static string WebRootPath;
-
+        
         public IActionResult Index()
         {
             WebRootPath = this._hostEnvironment.WebRootPath;
@@ -31,6 +31,16 @@ namespace League_of_Devs.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        [HttpPost]
+        public IActionResult Index(PostsModel name)
+        {
+
+            using Data data = new Data();
+            ViewBag.name = data.accounts.Where(x => x.Name.Contains(name.Title)).ToList();
+            if (loginController.User != null) ViewBag.posts = data.posts.Where(x => x.AccountId == loginController.User.Id).ToList();
+            else ViewBag.posts = data.posts.ToList();
+            return View();
         }
     }
 }

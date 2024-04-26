@@ -11,9 +11,9 @@
         <meta name="author" content="" />
         <title>League of Devs</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="../css/styles.css" rel="stylesheet" />
     </head>
     <style>
 .blue-button {
@@ -59,16 +59,6 @@
         <!-- Page header with logo and tagline-->
         <header class="py-5 bg-light border-bottom mb-4">
             <div class="container">
-                <div class="text-center my-5">
-                    <h1 class="fw-bolder">Welcome to League of Devs!</h1>
-                    <p class="lead mb-0">Your window to the developed future </p>
-                @{if(loginController.User != null)
-                {
-                    <a class="blue-button" href="./post/add">New Post</a>
-                    <a class="blue-button" href="./post/userinfo">Edit nfo</a>
-                }
-                }
-            </div>
             </div>
         </header>
         <!-- Page content-->
@@ -80,7 +70,7 @@
                         foreach(PostsModel post in ViewBag.posts)
                         {
                             <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top" src="@post.thumbimage" alt="..." /></a>
+                            <a href="#!"><img class="card-img-top" src="../@post.thumbimage" alt="..." /></a>
                                 <div class="card-body">
                                 <div class="small text-muted">January 1, 2023</div>
                                 @{
@@ -91,7 +81,7 @@
                                 <div class="small text">Author: <a name="@user.Id" href="#">@user.Name</a></div>
                                 <h2 class="card-title h4">@post.Title</h2>
                                 <p class="card-text">@post.Summary</p>
-                                <a class="btn btn-primary" href="/post/post?page=@post.Id" >Read more →</a>
+                                <a class="btn btn-primary" href="../post/post?page=@post.Id" >Read more →</a>
                                 </div>
                             </div>
                         }
@@ -112,12 +102,12 @@
                                 @{
                                     if (ViewBag.name != null && ViewBag.name.Count > 0)
                                     {
-                                        <ul style="width:100%;">
+                                        <select>
                                             @foreach (AccountsModel result in ViewBag.name)
                                             {
-                                                <hr /><il><a href="Users/User?page=@result.Id">@result.Name</a></il> 
+                                                <option>@result.Name</option>
                                             }
-                                    </ul>
+                                    </select>
                                 }
                                 }
                             </div>
@@ -149,7 +139,13 @@
                     <!-- Side widget-->
                     <div class="card mb-4">
                         <div class="card-header">Side Widget</div>
-                        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+                        <div class="card-body">
+                            <h4>@ViewBag.user.Name</h4>
+                            <p>@ViewBag.user.Bio</p>
+                            <span><b>Experience:</b> @ViewBag.user.Experience</span>
+                            <br>
+                            <span><b>Availability: </b>@ViewBag.user.Availability</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -158,9 +154,7 @@
         <footer class="py-5 bg-dark" id="about">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; League of Devs 2024</p></div>
         </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="../js/scripts.js"></script>
     </body>
 </html>

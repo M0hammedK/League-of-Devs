@@ -1,4 +1,5 @@
 @using League_of_Devs.Controllers;
+@using League_of_Devs.DateBase;
 
 <!DOCTYPE html>
 <html lang="en">
@@ -40,22 +41,74 @@
                 </div>
             </div>
         </nav>
-        <!-- Page header with logo and tagline-->
-@*         <header class="py-5 bg-light border-bottom mb-4">
-            <div class="container">
-                <div class="text-center my-5">
-                    <h1 class="fw-bolder">Welcome to League of Devs!</h1>
-                    <p class="lead mb-0">Your window to the developed future </p>
-                </div>
-            </div>
-        </header> *@
         <!-- Page content-->
-        <div class="container">
+       <div class="container">
             <div class="row">
                 <!-- Blog entries-->
                 <div class="col-lg-8">
-                    <!-- post content here -->
 
+                  <title>Post Design</title>
+                  <style>
+                    .post {
+                      width: 600px;
+                      margin: 20px auto;
+                      background-color: #f2f2f2;
+                      border: 1px solid #ccc;
+                      border-radius: 5px;
+                      padding: 20px;
+                      box-sizing: border-box;
+                      font-family: Arial, sans-serif;
+                    }
+
+                    .thumbnail {
+                      width: 100%;
+                      max-height: 200px;
+                      object-fit: cover;
+                      border-radius: 5px;
+                    }
+
+                    .title {
+                      font-size: 24px;
+                      font-weight: bold;
+                      margin-top: 10px;
+                    }
+
+                    .author {
+                      font-size: 16px;
+                      color: #666;
+                      margin-top: 5px;
+                    }
+
+                    .content {
+                      margin-top: 20px;
+                      line-height: 1.5;
+                    }
+                  </style>
+                  <div class="post" style="width:100%;">
+                    <img class="thumbnail" src="../@ViewBag.post.thumbimage" alt="Post Thumbnail">
+                    <h1 class="title">@ViewBag.post.Title</h1>
+                    @{
+                        using Data data = new Data();
+                        AccountsModel user;
+                        int id = ViewBag.post.AccountId;
+                        user = data.accounts.Where(x => x.Id == id).ToList().First();
+                    }
+                    <p class="author">Author: <a name="@user.Id" href="#">@user.Name</a></p>
+                    <div class="content">
+                        <p>@ViewBag.post.Content</p>
+                    </div>
+                    <div style="max-width:100%">
+                        @{
+                            string[] str = ViewBag.post.image.Split("S#S");
+                            for(int i = 0; i < str.Length - 1; i++)
+                            {
+                                <img class="thumbnail" style="max-height:100%" src="../@str[i]"/>
+                                <br />
+                                <br />
+                            }
+                        }
+                    </div>
+                  </div>
                 </div>
                 <!-- Side widgets-->
                 <div class="col-lg-4">
@@ -94,11 +147,18 @@
                     <!-- Side widget-->
                     <div class="card mb-4">
                         <div class="card-header">Side Widget</div>
-                        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+                        <div class="card-body">
+                            <h4>@user.Name</h4>
+                            <p>@user.Bio</p>
+                            <span><b>Experience:</b> @user.Experience</span>
+                            <br>
+                            <span><b>Availability: </b>@user.Availability</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+       </div>
+              
         <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; League of Devs 2024</p></div>
