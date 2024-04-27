@@ -82,7 +82,13 @@
                                 <h2 class="card-title h4">@post.Title</h2>
                                 <p class="card-text">@post.Summary</p>
                                 <a class="btn btn-primary" href="/post/post?page=@post.Id">Read more →</a>
+                                @{ if(loginController.User !=null && loginController.User.Id==post.AccountId)
+                                {
+
                                 <a class="btn btn-primary" href="/post/add?page=@post.Id">Edit Post</a>
+
+                                }
+                                }
                                 </div>
                             </div>
                         }
