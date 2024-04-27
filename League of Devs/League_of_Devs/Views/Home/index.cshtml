@@ -16,17 +16,7 @@
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <style>
-.blue-button {
-  background-color: blue;
-  color: white;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 4px;
-  border: none;
-}
+
 </style>
 
     <body>
@@ -91,7 +81,7 @@
                                 <div class="small text">Author: <a name="@user.Id" href="#">@user.Name</a></div>
                                 <h2 class="card-title h4">@post.Title</h2>
                                 <p class="card-text">@post.Summary</p>
-                                <a class="btn btn-primary" href="/post/post?page=@post.Id" >Read more →</a>
+                                <a class="btn btn-primary" href="/post/add?page=@post.Id" >Read more →</a>
                                 </div>
                             </div>
                         }

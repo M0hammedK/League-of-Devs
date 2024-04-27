@@ -48,30 +48,62 @@
     </nav>
     <div style="height:50px"> </div>
     <div class="form-container">
-        <form asp-action="add" method="post" asp-controller="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label class="form-label" asp-for="Title">Project Title:</label>
-                <input class="form-input" type="text" id="project-title" asp-for="Title" required>
-            </div>
-            <div class="form-group">
-                <label class="form-label" asp-for="Summary">Summary:</label>
-                <textarea class="form-input" id="summary" asp-for="Summary" required></textarea>
-            </div>
-            <div class="form-group">
-                <label class="form-label" asp-for="ThumbImage">Thumbnail Image:</label>
-                <input class="form-input" type="file" id="thumbnail" asp-for="ThumbImage" accept="image/*" required>
-            </div>
-            <div class="form-group">
-                <label class="form-label" asp-for="Content">Content:</label>
-                <textarea class="form-input" id="content" asp-for="Content" required></textarea>
-            </div>
-            <div class="form-group">
-                <label class="form-label" asp-for="Image">Upload Images:</label>
-                <input class="form-input" type="file" id="images" asp-for="Image" accept="image/*" multiple>
-            </div>
-            <p></p>
-                <button type="submit">Submit</button>
-        </form>
+        @{
+            if (ViewBag.post != null)
+            {
+                <form asp-action="add" method="post" asp-controller="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="form-label" asp-for="Title">Project Title:</label>
+                        <input class="form-input" type="text" value="@ViewBag.post.Title" id="project-title" asp-for="Title" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="Summary">Summary:</label>
+                        <input class="form-input" id="summary" value="@ViewBag.post.Summary" asp-for="Summary" required></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="ThumbImage">Thumbnail Image:</label>
+                        <input class="form-input" type="file" id="thumbnail" value="@ViewBag.post.thumbimage" asp-for="ThumbImage" accept="image/*" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="Content">Content:</label>
+                        <input class="form-input" id="content" value="@ViewBag.post.Content" asp-for="Content" required></input>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="Image">Upload Images:</label>
+                        <input class="form-input" type="file" id="images" value="@ViewBag.post.image" asp-for="Image" accept="image/*" multiple>
+                    </div>
+                    <p></p>
+                    <button type="submit" name="type">Edit</button>
+                </form>
+            }
+            else
+            {
+                <form asp-action="add" method="post" asp-controller="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="form-label" asp-for="Title">Project Title:</label>
+                        <input class="form-input" type="text" id="project-title" asp-for="Title" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="Summary">Summary:</label>
+                        <textarea class="form-input" id="summary" asp-for="Summary" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="ThumbImage">Thumbnail Image:</label>
+                        <input class="form-input" type="file" id="thumbnail" asp-for="ThumbImage" accept="image/*" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="Content">Content:</label>
+                        <textarea class="form-input" id="content" asp-for="Content" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" asp-for="Image">Upload Images:</label>
+                        <input class="form-input" type="file" id="images" asp-for="Image" accept="image/*" multiple>
+                    </div>
+                    <p></p>
+                    <button type="submit" name="type">Add</button>
+                </form>
+            }
+        }
     </div>
             
     <!-- Page header with logo and tagline-->

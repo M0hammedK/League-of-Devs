@@ -87,11 +87,23 @@
                   <div class="post" style="width:100%;">
                     <img class="thumbnail" src="../@ViewBag.post.thumbimage" alt="Post Thumbnail">
                     <h1 class="title">@ViewBag.post.Title</h1>
+
                     @{
+
                         using Data data = new Data();
                         AccountsModel user;
                         int id = ViewBag.post.AccountId;
                         user = data.accounts.Where(x => x.Id == id).ToList().First();
+                        if (loginController.User != null)
+                        {
+                            if (loginController.User.Id == id)
+                            {
+                            <form>
+                            
+                            <button type="submit" class="blue-button" asp-action="delete" asp-controller="post">delete post </button>
+                            </form>
+                            }
+                        }
                     }
                     <p class="author">Author: <a name="@user.Id" href="#">@user.Name</a></p>
                     <div class="content">

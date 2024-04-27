@@ -13,8 +13,14 @@ namespace League_of_Devs.Controllers
             ViewBag.post = data.posts.Where(x => x.Id == Convert.ToInt32(page)).ToList().First();
             return View();
         }
-        public IActionResult add()
+        public IActionResult add(string page)
         {
+            if (page != null)
+            {
+                using Data data = new Data();
+                ViewBag.post = data.posts.Where(x => x.Id == Convert.ToInt32(page)).First();
+                TempData["post_id"] = page;
+            }
             return View();
         }
         public IActionResult userinfo()
@@ -24,7 +30,7 @@ namespace League_of_Devs.Controllers
         }
 
         [HttpPost]
-        public IActionResult add(PostsModel post_data)
+        public IActionResult add(PostsModel post_data, string type)
         {
             using Data data = new Data();
             string wwwpath = HomeController.WebRootPath;
@@ -49,7 +55,7 @@ namespace League_of_Devs.Controllers
             if (post_data.Image != null)
             {
                 List<string> filename = new List<string>();
-                foreach(var img in post_data.Image)
+                foreach (var img in post_data.Image)
                 {
                     string str = img.FileName;
                     string filedir = Path.Combine(path, str);
@@ -68,12 +74,25 @@ namespace League_of_Devs.Controllers
                 }
             }
             post_data.AccountId = loginController.User.Id;
-            data.posts.Add(post_data);
-            data.SaveChanges();
-            post_data.image = "";
-            return View();
+            if (type == "Add")
+            {
+                data.posts.Add(post_data);
+                data.SaveChanges();
+                return View();
+            }
+            else
+            {
+                PostsModel post = data.posts.Where(post => post.Id == Convert.ToInt32(TempData["post_id"])).First();
+                post.image = post_data.image;
+                post.Title = post_data.Title;
+                post.Summary = post_data.Summary;
+                post.thumbimage = post_data.thumbimage;
+                post.Content = post_data.Content;
+                data.posts.Update(post);
+                data.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
         }
-
 
 
 
@@ -90,6 +109,22 @@ namespace League_of_Devs.Controllers
             ViewBag.user = loginController.User;
             return View();
         }
+            // Other actions...
+
+            [HttpPost]
+            public IActionResult delete(int id)
+            {
+                using (Data data = new Data())
+                {
+                    var postToDelete = data.posts.Find(id);
+                    if (postToDelete != null)
+                    {
+                        data.posts.Remove(postToDelete);
+                        data.SaveChanges();
+                    }
+                }
+                return RedirectToAction("Index", "Home");
+            }
 
     }
 }
