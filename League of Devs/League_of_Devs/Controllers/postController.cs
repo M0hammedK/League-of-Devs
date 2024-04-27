@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using League_of_Devs.Models;
 using League_of_Devs.DateBase;
+using System.Xml.Linq;
 
 namespace League_of_Devs.Controllers
 {
@@ -13,6 +14,9 @@ namespace League_of_Devs.Controllers
             ViewBag.post = data.posts.Where(x => x.Id == Convert.ToInt32(page)).ToList().First();
             return View();
         }
+
+
+        
         public IActionResult add(string page)
         {
             if (page != null)
@@ -111,20 +115,24 @@ namespace League_of_Devs.Controllers
         }
             // Other actions...
 
-            [HttpPost]
-            public IActionResult delete(int id)
+        [HttpGet]
+        public IActionResult delete(string id)
+        {
+            using Data data = new Data();
+
+            var postToDelete = data.posts.Find(int.Parse(id));
+
+
+            // Check if the post exists
+            if (postToDelete != null)
             {
-                using (Data data = new Data())
-                {
-                    var postToDelete = data.posts.Find(id);
-                    if (postToDelete != null)
-                    {
-                        data.posts.Remove(postToDelete);
-                        data.SaveChanges();
-                    }
-                }
-                return RedirectToAction("Index", "Home");
+                // Delete the post
+                data.posts.Remove(postToDelete);
+                data.SaveChanges();
             }
 
+            // Redirect to the home page after deletion
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

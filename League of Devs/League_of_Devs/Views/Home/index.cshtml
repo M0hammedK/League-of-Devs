@@ -81,7 +81,8 @@
                                 <div class="small text">Author: <a name="@user.Id" href="#">@user.Name</a></div>
                                 <h2 class="card-title h4">@post.Title</h2>
                                 <p class="card-text">@post.Summary</p>
-                                <a class="btn btn-primary" href="/post/add?page=@post.Id" >Read more →</a>
+                                <a class="btn btn-primary" href="/post/post?page=@post.Id">Read more →</a>
+                                <a class="btn btn-primary" href="/post/add?page=@post.Id">Edit Post</a>
                                 </div>
                             </div>
                         }
@@ -109,39 +110,50 @@
                                             }
                                     </ul>
                                 }
-                                }
-                            </div>
+                            }
+                        </div>
 
-                        </div>
-                    </div>
-                    <!-- Categories widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">Categories</div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">Web Design</a></li>
-                                        <li><a href="#!">HTML</a></li>
-                                        <li><a href="#!">Freebies</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-sm-6">
-                                    <ul class="list-unstyled mb-0">
-                                        <li><a href="#!">JavaScript</a></li>
-                                        <li><a href="#!">CSS</a></li>
-                                        <li><a href="#!">Tutorials</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Side widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">Side Widget</div>
-                        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
                     </div>
                 </div>
+                <!-- Categories widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Categories</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#!">Web Design</a></li>
+                                    <li><a href="#!">HTML</a></li>
+                                    <li><a href="#!">Freebies</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li><a href="#!">JavaScript</a></li>
+                                    <li><a href="#!">CSS</a></li>
+                                    <li><a href="#!">Tutorials</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Side widget-->
+                <div class="card mb-4">
+                    <div class="card-header">Side Widget</div>
+                    <div class="card-body">
+                    @{
+                        if (loginController.User !=null){
+                        <h4>@loginController.User.Name</h4>
+                        <p>@loginController.User.Bio</p>
+                        <span><b>Experience:</b> @loginController.User.Experience</span>
+                        <br>
+                        <span><b>Availability: </b>@loginController.User.Availability</span>
+                            }
+                    }
+                    </div>
+
+                </div>
+            </div>
             </div>
         </div>
         <!-- Footer-->

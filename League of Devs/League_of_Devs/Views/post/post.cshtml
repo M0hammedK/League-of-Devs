@@ -98,10 +98,11 @@
                         {
                             if (loginController.User.Id == id)
                             {
-                            <form>
-                            
-                            <button type="submit" class="blue-button" asp-action="delete" asp-controller="post">delete post </button>
-                            </form>
+                                {
+                                    <a class="blue-button" href="/post/delete?id=@ViewBag.post.Id">Delete Post</a>
+
+                                }
+
                             }
                         }
                     }
