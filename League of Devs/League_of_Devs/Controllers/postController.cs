@@ -81,8 +81,6 @@ namespace League_of_Devs.Controllers
             if (type == "Add")
             {
                 data.posts.Add(post_data);
-                data.SaveChanges();
-                return View();
             }
             else
             {
@@ -93,9 +91,9 @@ namespace League_of_Devs.Controllers
                 post.thumbimage = post_data.thumbimage;
                 post.Content = post_data.Content;
                 data.posts.Update(post);
-                data.SaveChanges();
-                return RedirectToAction("Index", "Home");
             }
+            data.SaveChanges();
+            return RedirectToAction("Index", "Home");
         }
 
 
