@@ -32,6 +32,7 @@ namespace League_of_Devs.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
         [HttpPost]
         public IActionResult Index(PostsModel name)
         {

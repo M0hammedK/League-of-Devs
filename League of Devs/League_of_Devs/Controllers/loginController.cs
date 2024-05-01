@@ -45,17 +45,13 @@ namespace League_of_Devs.Controllers
 			{
 				if (client.Password == client.Password2)
 				{
-					if(data.accounts.ToList().Count == 0)
-                    {
-						client.Authorization = "admin";
-                    }
-					data.accounts.Add(client);
+					if(data.accounts.ToList().Count == 0) client.Authorization = "admin";
+   					data.accounts.Add(client);
 					data.SaveChanges();
 					return RedirectToAction("login", "login");
 
 				}
 				else ViewBag.msg = "passwords don't match";
-
 
 			} else ViewBag.msg = "Email is already registerd";
 		

@@ -15,8 +15,6 @@ namespace League_of_Devs.Controllers
             return View();
         }
 
-
-        
         public IActionResult add(string page)
         {
             if (page != null)
