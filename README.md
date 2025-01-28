@@ -9,14 +9,3 @@ adding posts with title,summary,thumbnaill image,list of images,
 ability to edit posts , delete them at will
 search functionality to search for users 
 sign up / sign in functionality
-
-
-CSG1
-
-contributors:
-حسن الحداد
-محمد الكاف
-احمد كريم
-تركي السعر
-هاشم العطاس
-عبد الرحمن بابراهيم
